@@ -11,7 +11,9 @@ A glasses-controlled viewer for individual public TikTok clips. It uses TikTok's
 | Right | Save or unsave the clip |
 | Left | Open the menu |
 
-The menu contains starter clips, saved clips, and a form for adding full TikTok video URLs. Saved clips stay in this Web App's browser storage on the device; they are not synced across devices. Shared short URLs (`vm.tiktok.com` / `vt.tiktok.com`) must be expanded to full `/@creator/video/…` URLs first.
+The menu contains a Discover catalog, saved clips, and a form for adding full TikTok video URLs. Saved clips stay in this Web App's browser storage on the device; they are not synced across devices. Shared short URLs (`vm.tiktok.com` / `vt.tiktok.com`) must be expanded to full `/@creator/video/…` URLs first.
+
+Discover learns from playback time reported by TikTok's Embed Player: finishing most of a clip or watching for 20 seconds raises that creator's chance of appearing next; quickly skipping lowers it. Saving a clip also raises its creator's preference. The algorithm keeps mixing in other creators and avoids showing the same creator repeatedly. Preferences and view counts are stored only in this Web App's local browser storage, can be cleared with **Reset recommendations**, and are never sent to a Socials server. This does not alter the TikTok account's own recommendations.
 
 ## Install on glasses
 
@@ -23,6 +25,8 @@ Serve the directory from a static server and open at a 600 × 600 viewport. Arro
 
 ## Limits
 
-Starter clips are a small curated set, not an endless discovery service. A clip may become private, be removed, or be blocked from embedding; skip to the next. The app only stores TikTok post IDs and labels locally. It does not store credentials or download videos.
+The Discover catalog currently has over 200 public creator clips. A [weekly GitHub Action](.github/workflows/refresh-catalog.yml) refreshes it from [TokGauge's public creator link listings](https://tokgauge.com/). This is a best-effort catalog, not TikTok's personal For You feed or an endless live feed. The [update script](scripts/update_catalog.py) preserves the last valid catalog when discovery fails; five hard-coded clips remain as a fallback if fetching the catalog fails on the glasses. If the scheduled workflow stops or the public listings change, run the workflow manually or update the source list.
 
-**Known hardware risk:** TikTok may place a cookie choice inside its cross-origin player. Socials cannot activate that choice through TikTok's documented player messaging API. A 600 × 600 desktop browser check confirmed the cookie panel appears in the UK. The actual glasses result is pending; do not assume this build is usable until the cookie choice and playback are tested on device. The older full-site route also failed at its cookie screen on the user's glasses.
+A clip may become private, be removed, or be blocked from embedding; skip to the next. The app only stores TikTok post IDs and labels locally. It does not store credentials or download videos.
+
+The user confirmed that the five-clip build plays on their glasses. TikTok can still show a cookie choice inside its cross-origin player, and individual videos can fail; Socials cannot activate the choice through TikTok's documented player messaging API. The older full-site route failed at its cookie screen on the user's glasses.

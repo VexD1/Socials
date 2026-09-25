@@ -30,12 +30,13 @@
     <section id="menu" class="menu hidden" aria-label="TikTok menu" aria-hidden="true">
       <div class="menu-card">
         <h1>Socials</h1>
-        <p>Public TikTok clips</p>
+        <p id="learning-status">Public clips, tuned by what you watch and save</p>
         <div id="menu-actions" class="menu-actions">
           <button type="button" data-action="resume">Continue watching</button>
-          <button type="button" data-action="starter">Starter clips</button>
+          <button type="button" data-action="discover">Discover clips</button>
           <button type="button" data-action="saved">Saved clips</button>
           <button type="button" data-action="add">Add a TikTok link</button>
+          <button type="button" data-action="reset">Reset recommendations</button>
         </div>
         <form id="add-form" class="hidden">
           <label for="clip-url">Paste a full TikTok video link</label>
@@ -48,6 +49,6 @@
       </div>
     </section>
   </main>
-  <script src="./app.js?v=5" defer></script>
+  <script src="./app.js?v=7" defer></script>
 </body>
 </html>
