@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Choose TikTok or Instagram Reels on Meta Ray-Ban Display.">
+    <link rel="icon" type="image/png" sizes="96x96" href="./icon-96.png">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Socials</title>
+  </head>
+  <body>
+    <main class="shell" aria-labelledby="app-title">
+      <header class="header">
+        <div class="mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div>
+          <p class="eyebrow">YOUR DISPLAY</p>
+          <h1 id="app-title">Socials</h1>
+        </div>
+      </header>
+
+      <p class="intro">What would you like to watch?</p>
+
+      <nav class="choices" aria-label="Choose a service">
+        <a class="choice tiktok" href="https://www.tiktok.com/foryou" aria-label="Open TikTok For You">
+          <span class="service-icon tiktok-icon" aria-hidden="true">♪</span>
+          <span class="choice-copy"><strong>TikTok</strong><small>For You</small></span>
+          <span class="arrow" aria-hidden="true">›</span>
+        </a>
+        <a class="choice instagram" href="https://www.instagram.com/reels/" aria-label="Open Instagram Reels">
+          <span class="service-icon reels-icon" aria-hidden="true"><span>▶</span></span>
+          <span class="choice-copy"><strong>Instagram</strong><small>Reels</small></span>
+          <span class="arrow" aria-hidden="true">›</span>
+        </a>
+      </nav>
+
+      <footer>
+        <p><span class="pinch" aria-hidden="true">●</span> Pinch to open <span class="divider" aria-hidden="true">·</span> Back to switch</p>
+      </footer>
+    </main>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
