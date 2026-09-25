@@ -15,6 +15,12 @@ The menu contains a Discover catalog, saved clips, and a form for adding full Ti
 
 Discover learns from playback time reported by TikTok's Embed Player: finishing most of a clip or watching for 20 seconds raises that creator's chance of appearing next; quickly skipping lowers it. Saving a clip also raises its creator's preference. The algorithm keeps mixing in other creators and avoids showing the same creator repeatedly. Preferences and view counts are stored only in this Web App's local browser storage, can be cleared with **Reset recommendations**, and are never sent to a Socials server. This does not alter the TikTok account's own recommendations.
 
+## Playback speed
+
+After a clip has played smoothly for a few seconds, Socials opens the next TikTok player in the background. Swiping down reuses that player, which can save the player setup delay. Only one next player is prepared, and Socials closes it if the current clip buffers, you pause, or you open the menu. The menu shows the last clip's time to first playback progress and a count of detected stalls for the current session.
+
+TikTok's Embed Player does not document a way to prebuffer video data or select stream quality. Preparing the player may improve switching, but it cannot guarantee that TikTok has buffered the next video's bytes or stop a TikTok stream from stalling. Playback speed on the glasses needs to be checked on the device.
+
 ## Install on glasses
 
 Use **https://vexd1.github.io/Socials/** as the Web App URL in the Meta AI phone app under **App Settings → App Connections → Web Apps → Add a Web App**. If Socials was already connected, reopen it after the new deployment; reconnect if the old screen remains cached.
