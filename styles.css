@@ -42,6 +42,7 @@ h1 { margin: 0; font-size: clamp(32px, 7vw, 40px); line-height: 1.08; letter-spa
 .arrow { margin-left: auto; color: #d9d3df; font-size: 38px; line-height: 1; }
 footer { margin-top: auto; padding-top: 26px; text-align: center; color: #bbb4c2; font-size: 16px; }
 footer p { margin: 0; }
+.fallback { margin-top: 9px; font-size: 13px; color: #99919f; }
 .pinch { font-size: 12px; color: #e9d3ff; vertical-align: 1px; }
 .divider { padding: 0 8px; }
 @media (max-height: 540px) { .shell { padding-top: 22px; } .intro { margin-top: 22px; } .choice { min-height: 95px; } footer { padding-top: 15px; } }
