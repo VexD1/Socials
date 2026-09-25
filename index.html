@@ -1,46 +1,53 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#000000">
-    <meta name="description" content="Choose TikTok or Instagram Reels on Meta Ray-Ban Display.">
-    <link rel="icon" type="image/png" sizes="96x96" href="./icon-96.png">
-    <link rel="manifest" href="./manifest.webmanifest">
-    <link rel="stylesheet" href="./styles.css">
-    <title>Socials</title>
-  </head>
-  <body>
-    <main class="shell" aria-labelledby="app-title">
-      <header class="header">
-        <div class="mark" aria-hidden="true"><span></span><span></span><span></span></div>
-        <div>
-          <p class="eyebrow">YOUR DISPLAY</p>
-          <h1 id="app-title">Socials</h1>
-        </div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=600, height=600, initial-scale=1.0">
+  <meta name="mrbd-web-app-capable" content="yes">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Watch public TikTok clips with Meta Ray-Ban Display controls.">
+  <link rel="icon" type="image/png" sizes="96x96" href="./icon-96.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Socials · TikTok</title>
+</head>
+<body>
+  <main class="app" aria-label="TikTok clips">
+    <iframe id="player" title="TikTok video" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe>
+    <div class="viewer" aria-hidden="true">
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark" aria-hidden="true">♪</span><span>Socials <small>/ TikTok</small></span></div>
+        <span id="counter" class="counter"></span>
       </header>
-
-      <p class="intro" id="activity" role="status" aria-live="polite">What would you like to watch?</p>
-
-      <nav class="choices" aria-label="Choose a service">
-        <button class="choice focusable tiktok" type="button" data-focusable data-url="https://www.tiktok.com/foryou" aria-label="Open TikTok For You">
-          <span class="service-icon tiktok-icon" aria-hidden="true">♪</span>
-          <span class="choice-copy"><strong>TikTok</strong><small>For You</small></span>
-          <span class="arrow" aria-hidden="true">›</span>
-        </button>
-        <button class="choice focusable instagram" type="button" data-focusable data-url="https://www.instagram.com/reels/" aria-label="Open Instagram Reels">
-          <span class="service-icon reels-icon" aria-hidden="true"><span>▶</span></span>
-          <span class="choice-copy"><strong>Instagram</strong><small>Reels</small></span>
-          <span class="arrow" aria-hidden="true">›</span>
-        </button>
-      </nav>
-
-      <footer>
-        <p><span class="pinch" aria-hidden="true">●</span> Pinch to open <span class="divider" aria-hidden="true">·</span> Back to switch</p>
-        <p class="fallback">If Back stays in a service, reopen Socials.</p>
-        <p class="diagnostic"><button id="test-pinch" type="button">Test pinch</button><span>v3</span></p>
-      </footer>
-    </main>
-    <script src="./app.js?v=3" defer></script>
-  </body>
+      <div class="mid-indicator" id="mid-indicator" aria-hidden="true"></div>
+      <div class="bottom">
+        <div class="clip-info"><strong id="author"></strong><p id="caption"></p></div>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <div class="hints"><span>↑↓ Clips</span><span>● Play / pause</span><span>← Menu</span><span>→ Save</span></div>
+      </div>
+    </div>
+    <button id="viewer" class="viewer-control" type="button" aria-label="Video controls. Up and down change clip. Pinch pauses or plays. Left opens menu. Right saves clip."></button>
+    <section id="menu" class="menu hidden" aria-label="TikTok menu" aria-hidden="true">
+      <div class="menu-card">
+        <h1>Socials</h1>
+        <p>Public TikTok clips</p>
+        <div id="menu-actions" class="menu-actions">
+          <button type="button" data-action="resume">Continue watching</button>
+          <button type="button" data-action="starter">Starter clips</button>
+          <button type="button" data-action="saved">Saved clips</button>
+          <button type="button" data-action="add">Add a TikTok link</button>
+        </div>
+        <form id="add-form" class="hidden">
+          <label for="clip-url">Paste a full TikTok video link</label>
+          <input id="clip-url" type="text" inputmode="url" autocomplete="off" placeholder="tiktok.com/@name/video/…">
+          <button type="submit">Add clip</button>
+          <button type="button" id="cancel-add">Cancel</button>
+        </form>
+        <p id="menu-message" role="status" aria-live="polite"></p>
+        <p class="menu-help">↑↓ Choose · Pinch select · ← Back</p>
+      </div>
+    </section>
+  </main>
+  <script src="./app.js?v=5" defer></script>
+</body>
 </html>

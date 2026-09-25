@@ -1,7 +1,7 @@
 {
   "name": "Socials",
   "short_name": "Socials",
-  "description": "Choose TikTok or Instagram Reels on Meta Ray-Ban Display.",
+  "description": "Watch public TikTok clips on Meta Ray-Ban Display.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#000000",

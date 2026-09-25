@@ -1,19 +1,28 @@
-# Socials for Meta Ray-Ban Display
+# Socials · TikTok for Meta Ray-Ban Display
 
-Socials is an experimental Web App launcher for TikTok For You and Instagram Reels. It currently does **not** provide working access to either feed on Meta Ray-Ban Display glasses.
+A glasses-controlled viewer for individual public TikTok clips. It uses TikTok's [official Embed Player](https://developers.tiktok.com/docs/en/embed-player) inside a Socials screen. It does not access a signed-in TikTok For You feed or require your TikTok password.
 
-## Important limitation
+## Controls
 
-TikTok and Instagram block their full sites from being embedded in another app. Socials therefore tries to open their own sites in the same browser view. In a real-glasses test on 25 September 2026, selecting either service reached Socials (the `Opening…` message appeared), but the page remained on Socials and then displayed `cannot open here`. Desktop browser navigation worked; it did not predict this device result. This project does not access a private feed API or collect account credentials.
+| Glasses D-pad | Action |
+| --- | --- |
+| Up / down | Previous / next clip |
+| Pinch (Select) | Play or pause, and enable sound |
+| Right | Save or unsave the clip |
+| Left | Open the menu |
 
-## Run locally
-
-Serve this directory from any static file server, such as `npx serve .`, and test at a 600 × 600 browser viewport. Arrow keys move between the two choices; Enter opens the focused service.
+The menu contains starter clips, saved clips, and a form for adding full TikTok video URLs. Saved clips stay in this Web App's browser storage on the device; they are not synced across devices. Shared short URLs (`vm.tiktok.com` / `vt.tiktok.com`) must be expanded to full `/@creator/video/…` URLs first.
 
 ## Install on glasses
 
-Host the files at a public HTTPS URL (GitHub Pages works). In the Meta AI phone app, enable Developer Mode, then go to **App Settings → App Connections → Web Apps → Add a Web App**. Enter **Socials** and the hosted URL. The app appears in the glasses' app grid.
+Use **https://vexd1.github.io/Socials/** as the Web App URL in the Meta AI phone app under **App Settings → App Connections → Web Apps → Add a Web App**. If Socials was already connected, reopen it after the new deployment; reconnect if the old screen remains cached.
 
-## On-device check
+## Test locally
 
-The current hardware result is an unresolved external-navigation failure. Registering the TikTok and Instagram URLs as separate glasses Web Apps loads the sites, but their cookie consent screens were not operable with the user's glasses controls in the 25 September 2026 on-device test. Feed scrolling and video playback were therefore not reached or verified. The direct-site route is not a working replacement for Socials. The source sites may change their browser behavior at any time.
+Serve the directory from a static server and open at a 600 × 600 viewport. Arrow keys simulate the D-pad, Enter simulates pinch. The [Meta Ray-Ban Display Simulator Chrome extension](https://github.com/facebook/meta-wearables-webapp#display-simulator-chrome-extension) can check layout and input behavior. The simulator cannot confirm on-device TikTok playback; test a clip on actual glasses before treating it as fully verified.
+
+## Limits
+
+Starter clips are a small curated set, not an endless discovery service. A clip may become private, be removed, or be blocked from embedding; skip to the next. The app only stores TikTok post IDs and labels locally. It does not store credentials or download videos.
+
+**Known hardware risk:** TikTok may place a cookie choice inside its cross-origin player. Socials cannot activate that choice through TikTok's documented player messaging API. A 600 × 600 desktop browser check confirmed the cookie panel appears in the UK. The actual glasses result is pending; do not assume this build is usable until the cookie choice and playback are tested on device. The older full-site route also failed at its cookie screen on the user's glasses.
