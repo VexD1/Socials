@@ -1,28 +1,42 @@
-// The glasses send directional gestures as arrow keys and selection as Enter.
-// Keep the service links as ordinary same-tab links so system Back can return here.
 const choices = [...document.querySelectorAll('.choice')];
+const activity = document.getElementById('activity');
+const startUrl = window.location.href;
+let opening = false;
 
-document.addEventListener('keydown', (event) => {
-  const current = choices.indexOf(document.activeElement);
-  if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-    event.preventDefault();
-    choices[(current + 1 + choices.length) % choices.length].focus();
-  } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
-    event.preventDefault();
-    choices[(current - 1 + choices.length) % choices.length].focus();
-  } else if (event.key === 'Enter' && current !== -1) {
-    // Glasses activation delivers Enter; explicitly activate the focused link.
-    event.preventDefault();
-    choices[current].click();
-  }
+function serviceName(button) {
+  return button.classList.contains('tiktok') ? 'TikTok' : 'Instagram Reels';
+}
+
+// Native buttons let the glasses browser own focus movement and activation.
+// This listener is observational only, so it cannot compete with the browser.
+choices.forEach(button => {
+  button.addEventListener('keydown', event => {
+    if (event.key === 'Enter') activity.textContent = `Pinch received for ${serviceName(button)}…`;
+  });
+
+  button.addEventListener('click', () => {
+    if (opening) return;
+    opening = true;
+    const name = serviceName(button);
+    activity.textContent = `Opening ${name}…`;
+
+    try { window.location.assign(button.dataset.url); }
+    catch { activity.textContent = `${name} cannot open here.`; opening = false; }
+
+    setTimeout(() => {
+      if (window.location.href === startUrl && document.visibilityState === 'visible') {
+        activity.textContent = `${name} cannot open here.`;
+        opening = false;
+      }
+    }, 4500);
+  });
 });
 
-// Restore the last selected service when returning with the glasses' Back action.
-choices.forEach((choice, index) => choice.addEventListener('click', () => {
-  try { sessionStorage.setItem('lastChoice', String(index)); } catch { /* optional */ }
-}));
+document.getElementById('test-pinch').addEventListener('click', () => {
+  activity.textContent = 'Pinch works in Socials.';
+});
+
 window.addEventListener('pageshow', () => {
-  let index = 0;
-  try { index = Number(sessionStorage.getItem('lastChoice')) || 0; } catch { /* optional */ }
-  if (choices[index]) choices[index].focus();
+  opening = false;
+  activity.textContent = 'What would you like to watch?';
 });
