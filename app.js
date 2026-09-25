@@ -10,6 +10,10 @@ document.addEventListener('keydown', (event) => {
   } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
     event.preventDefault();
     choices[(current - 1 + choices.length) % choices.length].focus();
+  } else if (event.key === 'Enter' && current !== -1) {
+    // Glasses activation delivers Enter; explicitly activate the focused link.
+    event.preventDefault();
+    choices[current].click();
   }
 });
 
